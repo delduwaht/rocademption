@@ -13,6 +13,16 @@ local prePoints = Config.Points;
 -- Emojis pour la loterie
 local EmojiList = Config.EmojiList
 
+StopResource('hardcap')
+
+AddEventHandler('onResourceStop', function(resource)
+	if resource == GetCurrentResourceName() then
+		if GetResourceState('hardcap') == 'stopped' then
+			StartResource('hardcap')
+		end
+	end
+end)
+
 -- Connexion d'un client
 AddEventHandler("playerConnecting", function(name, reject, def)
 	local source	= source
@@ -22,7 +32,7 @@ AddEventHandler("playerConnecting", function(name, reject, def)
 	if not steamID then
 		reject(Config.NoSteam)
 		CancelEvent()
-		return 
+		return
 	end
 
 	-- Lancement de la rocade, 
