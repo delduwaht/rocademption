@@ -1,7 +1,8 @@
-local connecte = false
+local connected = false
+
 AddEventHandler("playerSpawned", function()
-	if (connecte == false) then
+	if not connected then
 		TriggerServerEvent("rocademption:playerConnected")
-		connecte = true
+		connected = true
 	end
 end)
